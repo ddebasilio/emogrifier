@@ -20,6 +20,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 ### Fixed
+- Invalid CSS causes empty style nodes
+  ([#259](https://github.com/jjriv/emogrifier/pull/259))
 
 
 ### Security

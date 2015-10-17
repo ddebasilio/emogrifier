@@ -787,30 +787,56 @@ class EmogrifierTest extends \PHPUnit_Framework_TestCase
     public function invalidDeclarationDataProvider()
     {
         return [
+//            'empty string' => [''],
+//            'only a space' => [''],
+//            'only a newline' => [self::LF],
             'missing dash in property name' => ['font weight: bold;'],
-            'invalid character in property name' => ['-9webkit-text-size-adjust:none;'],
-            'missing :' => ['-webkit-text-size-adjust none'],
-            'missing value' => ['-webkit-text-size-adjust :'],
+//            'invalid character in property name' => ['-9webkit-text-size-adjust:none;'],
+//            'missing : and missing ' => ['-webkit-text-size-adjust none;'],
+//            'missing :' => ['-webkit-text-size-adjust none'],
+//            'missing value' => ['-webkit-text-size-adjust :'],
         ];
     }
 
     /**
      * @test
      *
-     * @param string $cssDeclarationBlock the CSS declaration block (without the curly braces)
+     * @param string $cssDeclaration the CSS declaration block (without the curly braces)
      *
      * @dataProvider invalidDeclarationDataProvider
      */
-    public function emogrifyDropsInvalidDeclaration($cssDeclarationBlock)
+    public function emogrifyDropsInvalidDeclaration($cssDeclaration)
     {
         $html = $this->html5DocumentType . '<html></html>';
-        $css = 'html {' . $cssDeclarationBlock . '}';
+        $css = 'html {' . $cssDeclaration . '}';
 
         $this->subject->setHtml($html);
         $this->subject->setCss($css);
 
         self::assertContains(
-            '<html style="">',
+            '<html>',
+            $this->subject->emogrify()
+        );
+    }
+
+    /**
+     * @test
+     *
+     * @param string $cssDeclaration the CSS declaration block (without the curly braces)
+     *
+     * @dataProvider invalidDeclarationDataProvider
+     */
+    public function emogrifyDropsInvalidDeclarationAndKeepsValidDeclaration($cssDeclaration)
+    {
+        $html = $this->html5DocumentType . '<html></html>';
+        $validDeclaration = 'color: #000;';
+        $css = 'html {' . $cssDeclaration . $validDeclaration . '}';
+
+        $this->subject->setHtml($html);
+        $this->subject->setCss($css);
+
+        self::assertContains(
+            '<html style="' . $validDeclaration . '">',
             $this->subject->emogrify()
         );
     }
