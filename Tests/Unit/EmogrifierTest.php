@@ -598,17 +598,17 @@ class EmogrifierTest extends \PHPUnit_Framework_TestCase
                 => ['span[title="bonjour"] {' . $styleRule . '} ', '#<span title="buenas dias">#'],
             'attribute value selector SPAN[title] not matches element without any attributes'
                 => ['span[title="bonjour"] {' . $styleRule . '} ', '#<span>#'],
-            'BODY:first-child matches first child'
-                => ['body:first-child {' . $styleRule . '} ', '#<p class="p-1" style="' . $styleRule . '">#'],
-            'BODY:first-child not matches middle child'
-                => ['body:first-child {' . $styleRule . '} ', '#<p class="p-2">#'],
-            'BODY:first-child not matches last child'
-                => ['body:first-child {' . $styleRule . '} ', '#<p class="p-3">#'],
-            'BODY:last-child not matches first child' => ['body:last-child {' . $styleRule . '} ', '#<p class="p-1">#'],
-            'BODY:last-child not matches middle child'
-                => ['body:last-child {' . $styleRule . '} ', '#<p class="p-2">#'],
-            'BODY:last-child matches last child'
-                => ['body:last-child {' . $styleRule . '} ', '#<p class="p-3" style="' . $styleRule . '">#'],
+            'P:first-child matches first child'
+                => ['p:first-child {' . $styleRule . '} ', '#<p class="p-1" style="' . $styleRule . '">#'],
+            'P:first-child not matches middle child'
+                => ['p:first-child {' . $styleRule . '} ', '#<p class="p-2">#'],
+            'P:first-child not matches last child'
+                => ['p:first-child {' . $styleRule . '} ', '#<p class="p-3">#'],
+            'P:last-child not matches first child' => ['p:last-child {' . $styleRule . '} ', '#<p class="p-1">#'],
+            'P:last-child not matches middle child'
+                => ['p:last-child {' . $styleRule . '} ', '#<p class="p-2">#'],
+            'P:last-child matches last child'
+                => ['p:last-child {' . $styleRule . '} ', '#<p class="p-3" style="' . $styleRule . '">#'],
         ];
     }
 
